@@ -52,7 +52,7 @@ class Invoice extends Component {
   });
 
   // static getDerivedStateFromProps(_, state) {
-  //     axios.post("http://localhost/spare_parts/session_checker.php")
+  //     axios.post("http://ec2-3-129-60-50.us-east-2.compute.amazonaws.com/spare_parts/session_checker.php")
   //         .then(value => {
   //             if (value.data === "no record found") return null;
   //             else if(value.data[0].status !== '1') {
@@ -62,20 +62,29 @@ class Invoice extends Component {
   // }
 
   componentWillMount = async () => {
-    await axios
-      .post("http://localhost/spare_parts/session_checker.php")
-      .then((value) => {
-        if (value.data === "no record found") return null;
-        else if (value.data[0].status !== "1") {
-          this.props.history.push("/login");
-        }
-      });
+    try {
+      await axios
+        .post(
+          "http://ec2-3-129-60-50.us-east-2.compute.amazonaws.com/spare_parts/session_checker.php"
+        )
+        .then((value) => {
+          if (value.data === "no record found") return null;
+          else if (value.data[0].status !== "1") {
+            this.props.history.push("/login");
+          }
+        });
+    } catch (error) {}
   };
 
   componentDidMount = () => {
-    axios
-      .post("http://localhost/spare_parts/sales.php", this.props.location.data)
-      .then((value) => console.log(value));
+    try {
+      axios
+        .post(
+          "http://ec2-3-129-60-50.us-east-2.compute.amazonaws.com/spare_parts/sales.php",
+          this.props.location.data
+        )
+        .then((value) => console.log(value));
+    } catch (error) {}
   };
 
   render() {

@@ -6,14 +6,19 @@ class AllExpanses extends Component {
   componentDidMount = async () => {
     let { data } = this.state;
     let rows = data.rows;
-    await axios
-      .post("http://localhost/spare_parts/all_expanse.php")
-      .then((response) => {
-        response.data.map((product, index) => {
-          rows = [...rows, product];
-          return null;
+    try {
+      await axios
+        .post(
+          "http://ec2-3-129-60-50.us-east-2.compute.amazonaws.com/spare_parts/all_expanse.php"
+        )
+        .then((response) => {
+          response.data.map((product, index) => {
+            rows = [...rows, product];
+            return null;
+          });
         });
-      });
+    } catch (error) {}
+
     data.rows = rows;
     this.setState({ data });
   };

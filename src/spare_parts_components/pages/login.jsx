@@ -20,21 +20,25 @@ class LoginPage extends Component {
   };
 
   componentWillMount = () => {
-    axios
-      .post("http://localhost/spare_parts/session_checker.php")
-      .then((value) => {
-        if (value.data === "no record found") return null;
-        else if (value.data[0].status === "1") {
-          this.props.history.push("/");
-        }
-      });
+    try {
+      axios
+        .post(
+          "http://ec2-3-129-60-50.us-east-2.compute.amazonaws.com/spare_parts/session_checker.php"
+        )
+        .then((value) => {
+          if (value.data === "no record found") return null;
+          else if (value.data[0].status === "1") {
+            this.props.history.push("/");
+          }
+        });
+    } catch (error) {}
   };
 
   onLogin = (val) => {
     const { email, password } = this.state;
     axios
       .post(
-        "http://localhost/spare_parts/signin.php",
+        "http://ec2-3-129-60-50.us-east-2.compute.amazonaws.com/spare_parts/signin.php",
         JSON.stringify({
           email: email,
         })
@@ -44,9 +48,12 @@ class LoginPage extends Component {
         // this.setState({email: "", password: ""});
         if (status) {
           axios
-            .post("http://localhost/spare_parts/session_create.php", {
-              email: email,
-            })
+            .post(
+              "http://ec2-3-129-60-50.us-east-2.compute.amazonaws.com/spare_parts/session_create.php",
+              {
+                email: email,
+              }
+            )
             .then((value) => this.setState({ login: true }));
         }
       });

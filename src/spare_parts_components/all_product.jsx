@@ -90,26 +90,31 @@ class AllProducts extends Component {
   componentDidMount = async () => {
     let { data, grossProfit } = this.state;
     let rows = data.rows;
-    await axios
-      .post("http://localhost/spare_parts/allproducts.php")
-      .then((response) => {
-        response.data.map((product, index) => {
-          const {
-            Product_Retail_Price,
-            Product_PurchasePrice,
-            Product_Quantity,
-          } = product;
-          product["qty"] = this.quantityComponent(
-            index,
-            product.Product_Quantity
-          );
-          product["Profit"] =
-            (Product_Retail_Price - Product_PurchasePrice) * Product_Quantity;
-          grossProfit += product["Profit"];
-          rows = [...rows, product];
-          return null;
+
+    try {
+      await axios
+        .post(
+          "http://ec2-3-129-60-50.us-east-2.compute.amazonaws.com/spare_parts/allproducts.php"
+        )
+        .then((response) => {
+          response.data.map((product, index) => {
+            const {
+              Product_Retail_Price,
+              Product_PurchasePrice,
+              Product_Quantity,
+            } = product;
+            product["qty"] = this.quantityComponent(
+              index,
+              product.Product_Quantity
+            );
+            product["Profit"] =
+              (Product_Retail_Price - Product_PurchasePrice) * Product_Quantity;
+            grossProfit += product["Profit"];
+            rows = [...rows, product];
+            return null;
+          });
         });
-      });
+    } catch (error) {}
     data.rows = rows;
     this.setState({ data, grossProfit });
   };
@@ -125,9 +130,14 @@ class AllProducts extends Component {
     };
 
     console.log(data);
-    axios
-      .post("http://localhost/spare_parts/update_product.php", data)
-      .then((value) => console.log(value));
+    try {
+      axios
+        .post(
+          "http://ec2-3-129-60-50.us-east-2.compute.amazonaws.com/spare_parts/update_product.php",
+          data
+        )
+        .then((value) => console.log(value));
+    } catch (error) {}
   };
 
   render() {

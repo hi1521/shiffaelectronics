@@ -84,14 +84,18 @@ class SalePage extends Component {
   };
 
   componentWillMount = () => {
-    axios
-      .post("http://localhost/spare_parts/session_checker.php")
-      .then((value) => {
-        if (value.data === "no record found") return null;
-        else if (value.data[0].status !== "1") {
-          this.props.history.push("/login");
-        }
-      });
+    try {
+      axios
+        .post(
+          "http://ec2-3-129-60-50.us-east-2.compute.amazonaws.com/spare_parts/session_checker.php"
+        )
+        .then((value) => {
+          if (value.data === "no record found") return null;
+          else if (value.data[0].status !== "1") {
+            this.props.history.push("/login");
+          }
+        });
+    } catch (error) {}
   };
 
   onEnter = async () => {
@@ -194,7 +198,9 @@ class SalePage extends Component {
   componentDidMount = async () => {
     let { categories, products } = this.state;
     await axios
-      .post("http://localhost/spare_parts/show_category.php")
+      .post(
+        "http://ec2-3-129-60-50.us-east-2.compute.amazonaws.com/spare_parts/show_category.php"
+      )
       .then((response) => {
         if (response.data !== " no record found") {
           response.data.map((category) => {
@@ -208,7 +214,9 @@ class SalePage extends Component {
         }
       });
     await axios
-      .post("http://localhost/spare_parts/allproducts.php")
+      .post(
+        "http://ec2-3-129-60-50.us-east-2.compute.amazonaws.com/spare_parts/allproducts.php"
+      )
       .then((response) => {
         if (response.data !== " no record found") {
           response.data.map((product) => {

@@ -6,19 +6,26 @@ class InsertProduct extends Component {
   state = {};
 
   componentWillMount = () => {
-    axios
-      .post("http://localhost/spare_parts/session_checker.php")
-      .then((value) => {
-        if (value.data === "no record found") return null;
-        else if (value.data[0].status !== "1") {
-          this.props.history.push("/login");
-        }
-      });
+    try {
+      axios
+        .post(
+          "http://ec2-3-129-60-50.us-east-2.compute.amazonaws.com/spare_parts/session_checker.php"
+        )
+        .then((value) => {
+          if (value.data === "no record found") return null;
+          else if (value.data[0].status !== "1") {
+            this.props.history.push("/login");
+          }
+        });
+    } catch (error) {}
   };
 
   onInsertProduct = (product) => {
     axios
-      .post("http://localhost/spare_parts/insert_product.php", product)
+      .post(
+        "http://ec2-3-129-60-50.us-east-2.compute.amazonaws.com/spare_parts/insert_product.php",
+        product
+      )
       .then((response) => console.log(response));
   };
 

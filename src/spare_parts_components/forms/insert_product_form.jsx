@@ -41,21 +41,25 @@ class InsertProductForm extends Component {
 
   componentDidMount = () => {
     let { categories } = this.state;
-    axios
-      .post("http://localhost/spare_parts/show_category.php")
-      .then((response) => {
-        if (response.data !== " no record found") {
-          response.data.map((category) => {
-            const newCategory = {
-              text: category.Category_Name,
-              value: category.Category_Name,
-            };
-            categories = [...categories, newCategory];
-            return null;
-          });
-          this.setState({ categories });
-        }
-      });
+    try {
+      axios
+        .post(
+          "http://ec2-3-129-60-50.us-east-2.compute.amazonaws.com/spare_parts/show_category.php"
+        )
+        .then((response) => {
+          if (response.data !== " no record found") {
+            response.data.map((category) => {
+              const newCategory = {
+                text: category.Category_Name,
+                value: category.Category_Name,
+              };
+              categories = [...categories, newCategory];
+              return null;
+            });
+            this.setState({ categories });
+          }
+        });
+    } catch (error) {}
   };
 
   onAdd = () => {
