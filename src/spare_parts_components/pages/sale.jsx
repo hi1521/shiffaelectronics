@@ -199,15 +199,15 @@ class SalePage extends Component {
     let { categories, products } = this.state;
     categories = this.fetchAllCategories();
     products = this.fetchAllProducts();
-    
+
     this.setState({ products, categories });
     this.setState({ isMounted: true });
   };
 
   fetchAllProducts = () => {
-    let products = {}
+    let products = {};
 
-    await axios
+    axios
       .post(
         "http://ec2-3-129-60-50.us-east-2.compute.amazonaws.com/spare_parts/allproducts.php"
       )
@@ -238,8 +238,7 @@ class SalePage extends Component {
         }
         return null;
       });
-      return products
-
+    return products;
   };
 
   fetchAllCategories = () => {
@@ -463,31 +462,30 @@ class SalePage extends Component {
     });
   };
 
-
   onClear = () => {
     let products = this.fetchAllProducts();
     let categories = this.fetchAllCategories();
     this.setState({
-    customerName: "",
-    customerAddress: "",
-    customerPhone: "",
-    customerCNIC: "",
-    date: "",
-    time: "",
-    rowCount: 1,
-    SelectedCategory: [this.notSelected],
-    SelectedProducts: [this.notSelected],
-    SelectedPrices: [0],
-    SelectedQty: [1],
-    SelectedIds: [""],
-    SelectedHaveQty: [0],
-    subTotal: 0,
-    discount: 0,
-    total: 0,
-    categories,
-    products
-  })
-  }
+      customerName: "",
+      customerAddress: "",
+      customerPhone: "",
+      customerCNIC: "",
+      date: "",
+      time: "",
+      rowCount: 1,
+      SelectedCategory: [this.notSelected],
+      SelectedProducts: [this.notSelected],
+      SelectedPrices: [0],
+      SelectedQty: [1],
+      SelectedIds: [""],
+      SelectedHaveQty: [0],
+      subTotal: 0,
+      discount: 0,
+      total: 0,
+      categories,
+      products,
+    });
+  };
 
   computeSubtotal = () => {
     return this.state.SelectedPrices.reduce((val, newVal) => val + newVal);
@@ -668,9 +666,7 @@ class SalePage extends Component {
                         <MDBBtn onClick={this.onEnter}> Enter Bill </MDBBtn>
                       </MDBCol>
                       <MDBCol sm="3">
-                        <MDBBtn onClick={() => {
-
-                        }}> Clear </MDBBtn>
+                        <MDBBtn onClick={() => {}}> Clear </MDBBtn>
                       </MDBCol>
                     </MDBRow>
                   </div>
