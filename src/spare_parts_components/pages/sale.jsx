@@ -195,11 +195,9 @@ class SalePage extends Component {
     },
   };
 
-  componentDidMount = async () => {
-    let { categories, products } = this.state;
+  componentDidMount = () => {
     this.fetchAllCategories();
     this.fetchAllProducts();
-    this.setState({ products, categories });
   };
 
   fetchAllProducts = () => {
@@ -662,7 +660,7 @@ class SalePage extends Component {
                         <MDBBtn onClick={this.onEnter}> Enter Bill </MDBBtn>
                       </MDBCol>
                       <MDBCol sm="3">
-                        <MDBBtn onClick={() => {}}> Clear </MDBBtn>
+                        <MDBBtn onClick={this.onClear}> Clear </MDBBtn>
                       </MDBCol>
                     </MDBRow>
                   </div>
