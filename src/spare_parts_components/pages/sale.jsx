@@ -199,6 +199,8 @@ class SalePage extends Component {
     let { categories, products } = this.state;
     categories = this.fetchAllCategories();
     products = this.fetchAllProducts();
+    console.log(categories);
+    categories.then((data) => console.log(data));
 
     this.setState({ products, categories });
     this.setState({ isMounted: true });
