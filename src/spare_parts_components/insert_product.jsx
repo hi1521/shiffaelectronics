@@ -26,7 +26,9 @@ class InsertProduct extends Component {
         "http://ec2-3-129-60-50.us-east-2.compute.amazonaws.com/spare_parts/insert_product.php",
         product
       )
-      .then((response) => console.log(response));
+      .then((_response) => {
+        return true;
+      });
   };
 
   render() {

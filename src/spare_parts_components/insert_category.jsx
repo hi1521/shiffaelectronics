@@ -29,7 +29,9 @@ class InsertCategory extends Component {
           Category_Status: status,
         }
       )
-      .then((response) => console.log(response.data));
+      .then((_response) => {
+        return true;
+      });
   };
   render() {
     return <InsertCategoryForm onAdd={this.onInsertCategory} />;

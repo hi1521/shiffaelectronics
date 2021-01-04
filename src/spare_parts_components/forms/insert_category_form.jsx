@@ -62,7 +62,14 @@ class InsertCategoryForm extends Component {
                       <MDBBtn
                         color="light-blue"
                         className="mb-3"
-                        onClick={() => onAdd(name, status)}
+                        onClick={() => {
+                          if (onAdd(name, status)) {
+                            this.setState({
+                              name: "",
+                              status: "",
+                            });
+                          }
+                        }}
                       >
                         Add
                       </MDBBtn>

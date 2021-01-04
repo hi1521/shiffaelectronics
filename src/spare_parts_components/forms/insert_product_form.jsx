@@ -62,6 +62,23 @@ class InsertProductForm extends Component {
     } catch (error) {}
   };
 
+  resetFields = () => {
+    this.setState({
+      productName: "",
+      categoryName: "",
+      productBrand: "",
+      productColor: "",
+      productSize: "",
+      productPurchasePrice: 0,
+      productCode: "",
+      productDiscountPrice: "",
+      productModel: "",
+      productQuantity: 0,
+      productRetailPrice: 0,
+      productStatus: "",
+    });
+  };
+
   onAdd = () => {
     const { onAdd } = this.props;
     const {
@@ -98,7 +115,7 @@ class InsertProductForm extends Component {
       Product_Purchase_Date: currentTime,
       fileToUpload: fileToUpload,
     };
-    onAdd(product);
+    if (onAdd(product)) this.resetFields();
   };
 
   render() {
