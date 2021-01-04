@@ -63,11 +63,12 @@ class InsertCategoryForm extends Component {
                         color="light-blue"
                         className="mb-3"
                         onClick={() => {
+                          this.setState({
+                            name: "",
+                            status: "",
+                          });
                           if (onAdd(name, status)) {
-                            this.setState({
-                              name: "",
-                              status: "",
-                            });
+                            console.log("Result");
                           }
                         }}
                       >

@@ -34,6 +34,7 @@ class InsertCategory extends Component {
         )
         .then((_response) => {
           result = true;
+          console.log("yes");
         });
     } catch (error) {
       result = false;
