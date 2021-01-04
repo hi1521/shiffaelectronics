@@ -1,3 +1,4 @@
+import { result } from "lodash";
 import React, { Component } from "react";
 import InsertCategoryForm from "./forms/insert_category_form";
 const axios = require("axios");
@@ -21,17 +22,23 @@ class InsertCategory extends Component {
   };
 
   onInsertCategory = (name, status) => {
-    axios
-      .post(
-        "http://ec2-3-129-60-50.us-east-2.compute.amazonaws.com/spare_parts/create_category.php",
-        {
-          Category_Name: name,
-          Category_Status: status,
-        }
-      )
-      .then((_response) => {
-        return true;
-      });
+    let result = false;
+    try {
+      axios
+        .post(
+          "http://ec2-3-129-60-50.us-east-2.compute.amazonaws.com/spare_parts/create_category.php",
+          {
+            Category_Name: name,
+            Category_Status: status,
+          }
+        )
+        .then((_response) => {
+          result = true;
+        });
+    } catch (error) {
+      result = false;
+    }
+    return result;
   };
   render() {
     return <InsertCategoryForm onAdd={this.onInsertCategory} />;

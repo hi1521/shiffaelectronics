@@ -21,14 +21,21 @@ class InsertProduct extends Component {
   };
 
   onInsertProduct = (product) => {
-    axios
-      .post(
-        "http://ec2-3-129-60-50.us-east-2.compute.amazonaws.com/spare_parts/insert_product.php",
-        product
-      )
-      .then((_response) => {
-        return true;
-      });
+    let result = false;
+
+    try {
+      axios
+        .post(
+          "http://ec2-3-129-60-50.us-east-2.compute.amazonaws.com/spare_parts/insert_product.php",
+          product
+        )
+        .then((_response) => {
+          result = true;
+        });
+    } catch (error) {
+      result = false;
+    }
+    return result;
   };
 
   render() {
