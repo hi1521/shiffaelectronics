@@ -98,7 +98,7 @@ class SalePage extends Component {
     } catch (error) {}
   };
 
-  onEnter = async () => {
+  onEnter = () => {
     console.log("I am in the onEnter function");
     if (!this.validateData()) return;
     const {
@@ -197,22 +197,16 @@ class SalePage extends Component {
 
   componentDidMount = async () => {
     let { categories, products } = this.state;
-    await axios
-      .post(
-        "http://ec2-3-129-60-50.us-east-2.compute.amazonaws.com/spare_parts/show_category.php"
-      )
-      .then((response) => {
-        if (response.data !== " no record found") {
-          response.data.map((category) => {
-            const newCategory = {
-              name: category.Category_Name,
-              value: category.Category_Name,
-            };
-            categories = [...categories, newCategory];
-            return null;
-          });
-        }
-      });
+    categories = this.fetchAllCategories();
+    products = this.fetchAllProducts();
+    
+    this.setState({ products, categories });
+    this.setState({ isMounted: true });
+  };
+
+  fetchAllProducts = () => {
+    let products = {}
+
     await axios
       .post(
         "http://ec2-3-129-60-50.us-east-2.compute.amazonaws.com/spare_parts/allproducts.php"
@@ -244,9 +238,31 @@ class SalePage extends Component {
         }
         return null;
       });
-    this.setState({ products, categories });
-    this.setState({ isMounted: true });
+      return products
+
   };
+
+  fetchAllCategories = () => {
+    let categories = [];
+    axios
+      .post(
+        "http://ec2-3-129-60-50.us-east-2.compute.amazonaws.com/spare_parts/show_category.php"
+      )
+      .then((response) => {
+        if (response.data !== " no record found") {
+          response.data.map((category) => {
+            const newCategory = {
+              name: category.Category_Name,
+              value: category.Category_Name,
+            };
+            categories = [...categories, newCategory];
+            return null;
+          });
+        }
+      });
+    return categories;
+  };
+
   onAdd = () => {
     const {
       rowCount,
@@ -447,6 +463,32 @@ class SalePage extends Component {
     });
   };
 
+
+  onClear = () => {
+    let products = this.fetchAllProducts();
+    let categories = this.fetchAllCategories();
+    this.setState({
+    customerName: "",
+    customerAddress: "",
+    customerPhone: "",
+    customerCNIC: "",
+    date: "",
+    time: "",
+    rowCount: 1,
+    SelectedCategory: [this.notSelected],
+    SelectedProducts: [this.notSelected],
+    SelectedPrices: [0],
+    SelectedQty: [1],
+    SelectedIds: [""],
+    SelectedHaveQty: [0],
+    subTotal: 0,
+    discount: 0,
+    total: 0,
+    categories,
+    products
+  })
+  }
+
   computeSubtotal = () => {
     return this.state.SelectedPrices.reduce((val, newVal) => val + newVal);
   };
@@ -624,6 +666,11 @@ class SalePage extends Component {
                     <MDBRow>
                       <MDBCol sm="3">
                         <MDBBtn onClick={this.onEnter}> Enter Bill </MDBBtn>
+                      </MDBCol>
+                      <MDBCol sm="3">
+                        <MDBBtn onClick={() => {
+
+                        }}> Clear </MDBBtn>
                       </MDBCol>
                     </MDBRow>
                   </div>
