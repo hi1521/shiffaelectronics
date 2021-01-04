@@ -157,7 +157,7 @@ class SalePage extends Component {
   };
 
   state = {
-    isMounted: false,
+    isMounted: true,
     customerName: "",
     customerAddress: "",
     customerPhone: "",
@@ -197,13 +197,9 @@ class SalePage extends Component {
 
   componentDidMount = async () => {
     let { categories, products } = this.state;
-    categories = this.fetchAllCategories();
-    products = this.fetchAllProducts();
-    console.log(categories);
-    categories.then((data) => console.log(data));
-
+    this.fetchAllCategories();
+    this.fetchAllProducts();
     this.setState({ products, categories });
-    this.setState({ isMounted: true });
   };
 
   fetchAllProducts = () => {
@@ -240,7 +236,7 @@ class SalePage extends Component {
         }
         return null;
       });
-    return products;
+    this.setState({ products });
   };
 
   fetchAllCategories = () => {
@@ -261,7 +257,7 @@ class SalePage extends Component {
           });
         }
       });
-    return categories;
+    this.setState({ categories });
   };
 
   onAdd = () => {
@@ -465,8 +461,8 @@ class SalePage extends Component {
   };
 
   onClear = () => {
-    let products = this.fetchAllProducts();
-    let categories = this.fetchAllCategories();
+    this.fetchAllProducts();
+    this.fetchAllCategories();
     this.setState({
       customerName: "",
       customerAddress: "",
@@ -484,8 +480,6 @@ class SalePage extends Component {
       subTotal: 0,
       discount: 0,
       total: 0,
-      categories,
-      products,
     });
   };
 
