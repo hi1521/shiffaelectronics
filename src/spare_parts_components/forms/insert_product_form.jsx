@@ -120,6 +120,20 @@ class InsertProductForm extends Component {
   };
 
   render() {
+    const {
+      productName,
+      categoryName,
+      productBrand,
+      productColor,
+      productSize,
+      productPurchasePrice,
+      productCode,
+      productDiscountPrice,
+      productModel,
+      productQuantity,
+      productRetailPrice,
+      productStatus,
+    } = this.state;
     return (
       <div>
         <MDBContainer>
@@ -142,6 +156,7 @@ class InsertProductForm extends Component {
                             group
                             type="text"
                             validate
+                            value={productName}
                             onChange={(event) =>
                               this.setState({ productName: event.target.value })
                             }
@@ -159,6 +174,7 @@ class InsertProductForm extends Component {
                                 categoryName: val[0],
                               })
                             }
+                            value={categoryName}
                             label="Select Category"
                           />
                         </MDBCol>
@@ -168,6 +184,7 @@ class InsertProductForm extends Component {
                             group
                             type="text"
                             validate
+                            value={productBrand}
                             onChange={(event) =>
                               this.setState({
                                 productBrand: event.target.value,
@@ -185,6 +202,7 @@ class InsertProductForm extends Component {
                             group
                             type="text"
                             validate
+                            value={productModel}
                             onChange={(event) =>
                               this.setState({
                                 productModel: event.target.value,
@@ -199,6 +217,7 @@ class InsertProductForm extends Component {
                             group
                             type="text"
                             validate
+                            value={productCode}
                             onChange={(event) =>
                               this.setState({
                                 productCode: event.target.value,
@@ -213,6 +232,7 @@ class InsertProductForm extends Component {
                             group
                             type="text"
                             validate
+                            value={productQuantity}
                             onChange={(event) =>
                               this.setState({
                                 productQuantity: event.target.value,
@@ -230,6 +250,7 @@ class InsertProductForm extends Component {
                             group
                             type="text"
                             validate
+                            value={productSize}
                             onChange={(event) =>
                               this.setState({
                                 productSize: event.target.value,
@@ -244,6 +265,7 @@ class InsertProductForm extends Component {
                             group
                             type="text"
                             validate
+                            value={productColor}
                             onChange={(event) =>
                               this.setState({
                                 productColor: event.target.value,
@@ -258,6 +280,7 @@ class InsertProductForm extends Component {
                             group
                             type="text"
                             validate
+                            value={productPurchasePrice}
                             onChange={(event) =>
                               this.setState({
                                 productPurchasePrice: event.target.value,
@@ -275,6 +298,7 @@ class InsertProductForm extends Component {
                             group
                             type="text"
                             validate
+                            value={productRetailPrice}
                             onChange={(event) =>
                               this.setState({
                                 productRetailPrice: event.target.value,
@@ -289,6 +313,7 @@ class InsertProductForm extends Component {
                             group
                             type="text"
                             validate
+                            value={productDiscountPrice}
                             onChange={(event) =>
                               this.setState({
                                 productDiscountPrice: event.target.value,
@@ -303,6 +328,7 @@ class InsertProductForm extends Component {
                             group
                             type="text"
                             validate
+                            value={productStatus}
                             onChange={(event) =>
                               this.setState({
                                 productStatus: event.target.value,

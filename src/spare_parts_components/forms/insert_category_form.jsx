@@ -47,6 +47,7 @@ class InsertCategoryForm extends Component {
                         group
                         type="text"
                         validate
+                        value={name}
                         onChange={this.onNameChange}
                       />
                       <MDBInput
@@ -54,6 +55,7 @@ class InsertCategoryForm extends Component {
                         group
                         type="text"
                         validate
+                        value={status}
                         onChange={this.onStatusChange}
                       />
                     </div>
