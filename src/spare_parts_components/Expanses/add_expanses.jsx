@@ -39,7 +39,7 @@ class AddExpanses extends Component {
     try {
       axios
         .post(
-          "/http://ec2-3-129-60-50.us-east-2.compute.amazonaws.com/spare_parts/add_expanse.php",
+          "http://ec2-3-129-60-50.us-east-2.compute.amazonaws.com/spare_parts/add_expanse.php",
           data
         )
         .then((_value) => {
@@ -48,7 +48,9 @@ class AddExpanses extends Component {
             amount: 0,
           });
         });
-    } catch (error) {}
+    } catch (error) {
+      console.log("Error: Add Expense on Adding");
+    }
   };
 
   render() {
