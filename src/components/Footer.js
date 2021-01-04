@@ -15,7 +15,7 @@ class Copyrights extends Component {
       .post(
         "http://ec2-3-129-60-50.us-east-2.compute.amazonaws.com/spare_parts/logout.php"
       )
-      .then((value) => this.setState({ logout: true }));
+      .then((_value) => this.setState({ logout: true }));
   };
 
   render() {

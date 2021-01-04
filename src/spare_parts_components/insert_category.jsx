@@ -33,11 +33,10 @@ class InsertCategory extends Component {
           }
         )
         .then((_response) => {
-          result = true;
-          console.log("yes");
+          console.log(_response, "Successfully Addes the Product");
         });
     } catch (error) {
-      result = false;
+      console.log(error, "Error While adding Category");
     }
     return result;
   };

@@ -115,7 +115,8 @@ class InsertProductForm extends Component {
       Product_Purchase_Date: currentTime,
       fileToUpload: fileToUpload,
     };
-    if (onAdd(product)) this.resetFields();
+    onAdd(product);
+    this.resetFields();
   };
 
   render() {

@@ -21,8 +21,6 @@ class InsertProduct extends Component {
   };
 
   onInsertProduct = (product) => {
-    let result = false;
-
     try {
       axios
         .post(
@@ -30,12 +28,11 @@ class InsertProduct extends Component {
           product
         )
         .then((_response) => {
-          result = true;
+          console.log(_response);
         });
     } catch (error) {
-      result = false;
+      console.log(error, "Error while Adding Product");
     }
-    return result;
   };
 
   render() {
