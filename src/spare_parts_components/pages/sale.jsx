@@ -234,9 +234,9 @@ class SalePage extends Component {
             return null;
           });
         }
+        this.setState({ products });
         return null;
       });
-    this.setState({ products });
   };
 
   fetchAllCategories = () => {
@@ -256,8 +256,8 @@ class SalePage extends Component {
             return null;
           });
         }
+        this.setState({ categories });
       });
-    this.setState({ categories });
   };
 
   onAdd = () => {
